@@ -20,7 +20,7 @@ var renderCloud = function (ctx, x, y, color) {
 
 var getMaxElement = function (arr) {
   if (arr.length === 0) {
-    return '';
+    return null;
   }
 
   var maxElement = arr[0];
@@ -38,6 +38,21 @@ var getRandomBarColor = function () {
   return 'rgba(0, 0, 255, 0.' + Math.max(Math.trunc(Math.random() * 10), 1) + ')';
 };
 
+var renderColumn = function (ctx, players, times, i, maxTime) {
+  var xCoord = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
+  var barHeight = BAR_HEIGHT_MAX * (times[i] / maxTime);
+
+  ctx.fillStyle = FONT_COLOR;
+  ctx.textBaseline = 'ideographic';
+  ctx.fillText(players[i], xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT);
+
+  ctx.fillStyle = players[i] === 'Вы' ? BAR_COLOR_DEFAULT : getRandomBarColor();
+  ctx.fillRect(xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT - FONT_HEIGHT - barHeight, BAR_WIDTH, barHeight);
+
+  ctx.fillStyle = FONT_COLOR;
+  ctx.fillText(Math.round(times[i]) + '', xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT - FONT_HEIGHT - barHeight);
+};
+
 window.renderStatistics = function (ctx, players, times) {
   renderCloud(ctx, CLOUD_X + CLOUD_GAP, CLOUD_Y + CLOUD_GAP, 'rgba(0, 0, 0, 0.3)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#fff');
@@ -49,21 +64,8 @@ window.renderStatistics = function (ctx, players, times) {
   ctx.fillText('Список результатов:', CLOUD_X + FONT_HEIGHT, CLOUD_Y + FONT_HEIGHT + FONT_HEIGHT);
 
   var maxTime = getMaxElement(times);
-  var barHeight;
-  var xCoord;
 
   for (var i = 0; i < players.length; i++) {
-    xCoord = CLOUD_X + BAR_GAP + (BAR_WIDTH + BAR_GAP) * i;
-    barHeight = BAR_HEIGHT_MAX * (times[i] / maxTime);
-
-    ctx.fillStyle = FONT_COLOR;
-    ctx.textBaseline = 'ideographic';
-    ctx.fillText(players[i], xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT);
-
-    ctx.fillStyle = players[i] === 'Вы' ? BAR_COLOR_DEFAULT : getRandomBarColor();
-    ctx.fillRect(xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT - FONT_HEIGHT - barHeight, BAR_WIDTH, barHeight);
-
-    ctx.fillStyle = FONT_COLOR;
-    ctx.fillText(Math.round(times[i]) + '', xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT - FONT_HEIGHT - barHeight);
+    renderColumn(ctx, players, times, i, maxTime);
   }
 };
