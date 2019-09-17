@@ -58,7 +58,7 @@ window.renderStatistics = function (ctx, players, times) {
 
     ctx.fillStyle = FONT_COLOR;
     ctx.textBaseline = 'ideographic';
-    ctx.fillText(players[i], xCoord, CLOUD_Y + CLOUD_HEIGHT - 20);
+    ctx.fillText(players[i], xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT);
 
     ctx.fillStyle = players[i] === 'Вы' ? BAR_COLOR_DEFAULT : getRandomBarColor();
     ctx.fillRect(xCoord, CLOUD_Y + CLOUD_HEIGHT - FONT_HEIGHT - FONT_HEIGHT - barHeight, BAR_WIDTH, barHeight);
