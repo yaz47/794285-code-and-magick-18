@@ -29,8 +29,12 @@ var getListOfWizards = function (amount) {
 
 var wizards = getListOfWizards(WIZARD_AMOUNT_DEFAULT);
 
+var showElement = function (elem) {
+  elem.classList.remove('hidden');
+};
+
 var userDialog = document.querySelector('.setup');
-userDialog.classList.remove('hidden');
+showElement(userDialog);
 
 var similarListElement = userDialog.querySelector('.setup-similar-list');
 
@@ -48,10 +52,15 @@ var renderWizard = function (wizard) {
   return wizardElement;
 };
 
-var fragment = document.createDocumentFragment();
-for (var i = 0; i < wizards.length; i++) {
-  fragment.appendChild(renderWizard(wizards[i]));
-}
-similarListElement.appendChild(fragment);
+var renderWizards = function (wizardsList) {
+  var result = document.createDocumentFragment();
+  for (var i = 0; i < wizardsList.length; i++) {
+    result.appendChild(renderWizard(wizardsList[i]));
+  }
+  return result;
+};
 
-userDialog.querySelector('.setup-similar').classList.remove('hidden');
+similarListElement.appendChild(renderWizards(wizards));
+
+var similarList = userDialog.querySelector('.setup-similar');
+showElement(similarList);
