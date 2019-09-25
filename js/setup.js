@@ -7,6 +7,9 @@ var WIZARD_COAT_COLOR = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 10
 var WIZARD_EYES_COLOR = ['black', 'red', 'blue', 'yellow', 'green'];
 var WIZARD_AMOUNT_DEFAULT = 4;
 
+var ESC_KEYCODE = 27;
+var ENTER_KEYCODE = 13;
+
 var getRandomArrItem = function (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 };
@@ -33,10 +36,10 @@ var showElement = function (elem) {
   elem.classList.remove('hidden');
 };
 
-var userDialog = document.querySelector('.setup');
-showElement(userDialog);
-
-var similarListElement = userDialog.querySelector('.setup-similar-list');
+var setup = document.querySelector('.setup');
+var setupOpen = document.querySelector('.setup-open');
+var setupClose = setup.querySelector('.setup-close');
+var similarListElement = setup.querySelector('.setup-similar-list');
 
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
     .content
@@ -62,5 +65,41 @@ var renderWizards = function (wizardsList) {
 
 similarListElement.appendChild(renderWizards(wizards));
 
-var similarList = userDialog.querySelector('.setup-similar');
+var similarList = setup.querySelector('.setup-similar');
 showElement(similarList);
+
+var onPopupEscPress = function (evt) {
+  if (evt.keyCode === ESC_KEYCODE) {
+    closePopup();
+  }
+};
+
+var openPopup = function () {
+  setup.classList.remove('hidden');
+  document.addEventListener('keydown', onPopupEscPress);
+};
+
+var closePopup = function () {
+  setup.classList.add('hidden');
+  document.removeEventListener('keydown', onPopupEscPress);
+};
+
+setupOpen.addEventListener('click', function () {
+  openPopup();
+});
+
+setupOpen.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    openPopup();
+  }
+});
+
+setupClose.addEventListener('click', function () {
+  closePopup();
+});
+
+setupClose.addEventListener('keydown', function (evt) {
+  if (evt.keyCode === ENTER_KEYCODE) {
+    closePopup();
+  }
+});
