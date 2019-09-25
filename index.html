@@ -83,7 +83,9 @@
         <label>
           <input type="text" name="username"
                  maxlength="25" required
-                 class="setup-user-name" value="Синий Пендальф"/>
+                 class="setup-user-name" value="Синий Пендальф"
+                 pattern=".{2,25}"
+                 title="Имя должно содержать от 2 до 25 символов"/>
         </label>
       </div>
 
@@ -156,7 +158,7 @@
         <div class="setup-similar-list"><!--Список похожих персонажей--></div>
       </div>
 
-      <button class="button setup-submit">Сохранить</button>
+      <button class="button setup-submit" type="submit">Сохранить</button>
     </div>
   </form>
 </div>
