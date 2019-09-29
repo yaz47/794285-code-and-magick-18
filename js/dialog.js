@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-  var ESC_KEYCODE = 27;
-  var ENTER_KEYCODE = 13;
-
   var setup = document.querySelector('.setup');
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
@@ -11,7 +8,7 @@
   var dialogHandler = setup.querySelector('.upload');
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       closePopup();
     }
   };
@@ -33,7 +30,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    if (evt.keyCode === window.utils.ENTER_KEYCODE) {
       openPopup();
     }
   });
@@ -43,13 +40,13 @@
   });
 
   setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ENTER_KEYCODE) {
+    if (evt.keyCode === window.utils.ENTER_KEYCODE) {
       closePopup();
     }
   });
 
   setupUserName.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.ESC_KEYCODE) {
       evt.stopPropagation();
     }
   });
