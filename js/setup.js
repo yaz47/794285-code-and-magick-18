@@ -1,4 +1,3 @@
-// Файл setup.js
 'use strict';
 
 (function () {
