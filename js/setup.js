@@ -43,7 +43,7 @@
     showElement(similarList);
   };
 
-  window.backend.load(onWizardLoad, window.utils.onError);
+  window.backend.load(window.utils.URL.LOAD, onWizardLoad, window.utils.onError);
 
   var getCounter = function (start, end) {
     var counter = start;

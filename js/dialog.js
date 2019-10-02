@@ -7,7 +7,7 @@
   var setupUserName = setup.querySelector('.setup-user-name');
 
   var onPopupEscPress = function (evt) {
-    if (evt.keyCode === window.utils.ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.KEY_CODE.ESC) {
       closePopup();
     }
   };
@@ -29,7 +29,7 @@
   });
 
   setupOpen.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.utils.ENTER_KEYCODE) {
+    if (evt.keyCode === window.utils.KEY_CODE.ENTER) {
       openPopup();
     }
   });
@@ -39,13 +39,13 @@
   });
 
   setupClose.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.utils.ENTER_KEYCODE) {
+    if (evt.keyCode === window.utils.KEY_CODE.ENTER) {
       closePopup();
     }
   });
 
   setupUserName.addEventListener('keydown', function (evt) {
-    if (evt.keyCode === window.utils.ESC_KEYCODE) {
+    if (evt.keyCode === window.utils.KEY_CODE.ESC) {
       evt.stopPropagation();
     }
   });
@@ -54,7 +54,7 @@
 
   form.addEventListener('submit', function (evt) {
     evt.preventDefault();
-    window.backend.save(new FormData(form), function () {
+    window.backend.save(window.utils.URL.SAVE, new FormData(form), function () {
       closePopup();
     }, window.utils.onError);
   });
