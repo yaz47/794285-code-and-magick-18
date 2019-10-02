@@ -5,7 +5,6 @@
   var setupOpen = document.querySelector('.setup-open');
   var setupClose = setup.querySelector('.setup-close');
   var setupUserName = setup.querySelector('.setup-user-name');
-  var dialogHandler = setup.querySelector('.upload');
 
   var onPopupEscPress = function (evt) {
     if (evt.keyCode === window.utils.ESC_KEYCODE) {
@@ -51,6 +50,16 @@
     }
   });
 
+  var form = setup.querySelector('.setup-wizard-form');
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), function () {
+      closePopup();
+    }, window.utils.onError);
+  });
+
+  var dialogHandler = setup.querySelector('.upload');
   dialogHandler.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
